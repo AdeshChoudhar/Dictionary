@@ -4,9 +4,9 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
+  "/home/adeshchoudhar/GitHub/Dictionary/hash.c" "/home/adeshchoudhar/GitHub/Dictionary/cmake-build-debug/CMakeFiles/Dictionary.dir/hash.c.o"
   "/home/adeshchoudhar/GitHub/Dictionary/helpers.c" "/home/adeshchoudhar/GitHub/Dictionary/cmake-build-debug/CMakeFiles/Dictionary.dir/helpers.c.o"
   "/home/adeshchoudhar/GitHub/Dictionary/main.c" "/home/adeshchoudhar/GitHub/Dictionary/cmake-build-debug/CMakeFiles/Dictionary.dir/main.c.o"
-  "/home/adeshchoudhar/GitHub/Dictionary/spell.c" "/home/adeshchoudhar/GitHub/Dictionary/cmake-build-debug/CMakeFiles/Dictionary.dir/spell.c.o"
   "/home/adeshchoudhar/GitHub/Dictionary/trie.c" "/home/adeshchoudhar/GitHub/Dictionary/cmake-build-debug/CMakeFiles/Dictionary.dir/trie.c.o"
   )
 set(CMAKE_C_COMPILER_ID "GNU")

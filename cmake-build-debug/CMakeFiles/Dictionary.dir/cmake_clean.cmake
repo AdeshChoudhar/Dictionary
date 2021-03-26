@@ -1,7 +1,7 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/Dictionary.dir/hash.c.o"
   "CMakeFiles/Dictionary.dir/helpers.c.o"
   "CMakeFiles/Dictionary.dir/main.c.o"
-  "CMakeFiles/Dictionary.dir/spell.c.o"
   "CMakeFiles/Dictionary.dir/trie.c.o"
   "Dictionary"
   "Dictionary.pdb"

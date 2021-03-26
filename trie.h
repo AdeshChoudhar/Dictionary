@@ -5,4 +5,6 @@
 #ifndef DICTIONARY_TRIE_H
 #define DICTIONARY_TRIE_H
 
+#include "helpers.h"
+
 #endif //DICTIONARY_TRIE_H

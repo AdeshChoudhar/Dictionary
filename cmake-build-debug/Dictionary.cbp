@@ -76,6 +76,12 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/home/adeshchoudhar/GitHub/Dictionary/hash.c">
+			<Option target="Dictionary"/>
+		</Unit>
+		<Unit filename="/home/adeshchoudhar/GitHub/Dictionary/hash.h">
+			<Option target="Dictionary"/>
+		</Unit>
 		<Unit filename="/home/adeshchoudhar/GitHub/Dictionary/helpers.c">
 			<Option target="Dictionary"/>
 		</Unit>
@@ -83,12 +89,6 @@
 			<Option target="Dictionary"/>
 		</Unit>
 		<Unit filename="/home/adeshchoudhar/GitHub/Dictionary/main.c">
-			<Option target="Dictionary"/>
-		</Unit>
-		<Unit filename="/home/adeshchoudhar/GitHub/Dictionary/spell.c">
-			<Option target="Dictionary"/>
-		</Unit>
-		<Unit filename="/home/adeshchoudhar/GitHub/Dictionary/spell.h">
 			<Option target="Dictionary"/>
 		</Unit>
 		<Unit filename="/home/adeshchoudhar/GitHub/Dictionary/trie.c">

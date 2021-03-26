@@ -90,18 +90,18 @@ CMakeFiles/Dictionary.dir/main.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Dictionary.dir/main.c.s"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/adeshchoudhar/GitHub/Dictionary/main.c -o CMakeFiles/Dictionary.dir/main.c.s
 
-CMakeFiles/Dictionary.dir/spell.c.o: CMakeFiles/Dictionary.dir/flags.make
-CMakeFiles/Dictionary.dir/spell.c.o: ../spell.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/adeshchoudhar/GitHub/Dictionary/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/Dictionary.dir/spell.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/Dictionary.dir/spell.c.o   -c /home/adeshchoudhar/GitHub/Dictionary/spell.c
+CMakeFiles/Dictionary.dir/hash.c.o: CMakeFiles/Dictionary.dir/flags.make
+CMakeFiles/Dictionary.dir/hash.c.o: ../hash.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/adeshchoudhar/GitHub/Dictionary/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/Dictionary.dir/hash.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/Dictionary.dir/hash.c.o   -c /home/adeshchoudhar/GitHub/Dictionary/hash.c
 
-CMakeFiles/Dictionary.dir/spell.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Dictionary.dir/spell.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/adeshchoudhar/GitHub/Dictionary/spell.c > CMakeFiles/Dictionary.dir/spell.c.i
+CMakeFiles/Dictionary.dir/hash.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Dictionary.dir/hash.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/adeshchoudhar/GitHub/Dictionary/hash.c > CMakeFiles/Dictionary.dir/hash.c.i
 
-CMakeFiles/Dictionary.dir/spell.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Dictionary.dir/spell.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/adeshchoudhar/GitHub/Dictionary/spell.c -o CMakeFiles/Dictionary.dir/spell.c.s
+CMakeFiles/Dictionary.dir/hash.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Dictionary.dir/hash.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/adeshchoudhar/GitHub/Dictionary/hash.c -o CMakeFiles/Dictionary.dir/hash.c.s
 
 CMakeFiles/Dictionary.dir/trie.c.o: CMakeFiles/Dictionary.dir/flags.make
 CMakeFiles/Dictionary.dir/trie.c.o: ../trie.c
@@ -132,7 +132,7 @@ CMakeFiles/Dictionary.dir/helpers.c.s: cmake_force
 # Object files for target Dictionary
 Dictionary_OBJECTS = \
 "CMakeFiles/Dictionary.dir/main.c.o" \
-"CMakeFiles/Dictionary.dir/spell.c.o" \
+"CMakeFiles/Dictionary.dir/hash.c.o" \
 "CMakeFiles/Dictionary.dir/trie.c.o" \
 "CMakeFiles/Dictionary.dir/helpers.c.o"
 
@@ -140,7 +140,7 @@ Dictionary_OBJECTS = \
 Dictionary_EXTERNAL_OBJECTS =
 
 Dictionary: CMakeFiles/Dictionary.dir/main.c.o
-Dictionary: CMakeFiles/Dictionary.dir/spell.c.o
+Dictionary: CMakeFiles/Dictionary.dir/hash.c.o
 Dictionary: CMakeFiles/Dictionary.dir/trie.c.o
 Dictionary: CMakeFiles/Dictionary.dir/helpers.c.o
 Dictionary: CMakeFiles/Dictionary.dir/build.make

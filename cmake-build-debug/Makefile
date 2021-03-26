@@ -143,6 +143,33 @@ Dictionary/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Dictionary.dir/build.make CMakeFiles/Dictionary.dir/build
 .PHONY : Dictionary/fast
 
+hash.o: hash.c.o
+
+.PHONY : hash.o
+
+# target to build an object file
+hash.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Dictionary.dir/build.make CMakeFiles/Dictionary.dir/hash.c.o
+.PHONY : hash.c.o
+
+hash.i: hash.c.i
+
+.PHONY : hash.i
+
+# target to preprocess a source file
+hash.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Dictionary.dir/build.make CMakeFiles/Dictionary.dir/hash.c.i
+.PHONY : hash.c.i
+
+hash.s: hash.c.s
+
+.PHONY : hash.s
+
+# target to generate assembly for a file
+hash.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Dictionary.dir/build.make CMakeFiles/Dictionary.dir/hash.c.s
+.PHONY : hash.c.s
+
 helpers.o: helpers.c.o
 
 .PHONY : helpers.o
@@ -197,33 +224,6 @@ main.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Dictionary.dir/build.make CMakeFiles/Dictionary.dir/main.c.s
 .PHONY : main.c.s
 
-spell.o: spell.c.o
-
-.PHONY : spell.o
-
-# target to build an object file
-spell.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Dictionary.dir/build.make CMakeFiles/Dictionary.dir/spell.c.o
-.PHONY : spell.c.o
-
-spell.i: spell.c.i
-
-.PHONY : spell.i
-
-# target to preprocess a source file
-spell.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Dictionary.dir/build.make CMakeFiles/Dictionary.dir/spell.c.i
-.PHONY : spell.c.i
-
-spell.s: spell.c.s
-
-.PHONY : spell.s
-
-# target to generate assembly for a file
-spell.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Dictionary.dir/build.make CMakeFiles/Dictionary.dir/spell.c.s
-.PHONY : spell.c.s
-
 trie.o: trie.c.o
 
 .PHONY : trie.o
@@ -260,15 +260,15 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... Dictionary"
+	@echo "... hash.o"
+	@echo "... hash.i"
+	@echo "... hash.s"
 	@echo "... helpers.o"
 	@echo "... helpers.i"
 	@echo "... helpers.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
-	@echo "... spell.o"
-	@echo "... spell.i"
-	@echo "... spell.s"
 	@echo "... trie.o"
 	@echo "... trie.i"
 	@echo "... trie.s"
