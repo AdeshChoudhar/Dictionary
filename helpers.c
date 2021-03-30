@@ -81,7 +81,7 @@ void help() {
     printf("\n");
 }
 
-void get_meanings(char word[]) {
+void get_meanings(const char word[]) {
     char command[MAX + 30 + 1] = {'p', 'y', 't', 'h', 'o', 'n', ' ', '.', '.', '/', 's', 'c', 'r', 'i', 'p', 't', 's',
                                   '/', 'm', 'e', 'a', 'n', 'i', 'n', 'g', 's', '.', 'p', 'y', ' '};
     for (int i = 0; i < MAX + 1; i++) {
@@ -92,21 +92,51 @@ void get_meanings(char word[]) {
     system(command);
 }
 
-void clean_word(char word[]) {
-    int length;
-    for(length = 0; word[length] != '\0'; length++);
-    length += 1;
-
-    bool number_flag = true;
-    for (int i = 0; i < length - 1; i++) {
+bool is_number(char word[]) {
+    for (int i = 0; word[i] != '\0'; i++) {
         if (!isdigit(word[i])) {
-            number_flag = false;
-            break;
+            return false;
         }
     }
-    if (number_flag) {
-        word[0] = '.';
+    return true;
+}
+
+void clean(char word[]) {
+    int i, j;
+    char word_copy[MAX + 1];
+    for (i = 0, j = 0; word[i] != '\0'; i++) {
+        if (isalnum(word[i])) {
+            word_copy[j++] = word[i];
+        }
+    }
+    if (j == 0) {
+        word_copy[j++] = 'a';
+    }
+    word_copy[j] = '\0';
+    strcpy(word, word_copy);
+
+    int length;
+    for (length = 0; word[length] != '\0'; length++);
+
+    if (is_number(word)) {
+        word[0] = word[length - 1];
         word[1] = '\0';
+        return;
+    }
+
+    if (length >= 3) {
+        char th_word_copy[MAX - 1];
+        for (i = 0; i < length - 2; i++) {
+            th_word_copy[i] = word[i];
+        }
+        th_word_copy[i] = '\0';
+        if (is_number(th_word_copy)) {
+            word[0] = word[length - 3];
+            word[1] = word[length - 2];
+            word[2] = word[length - 1];
+            word[3] = '\0';
+            return;
+        }
     }
 }
 
@@ -115,8 +145,7 @@ double get_time(clock_t start, clock_t stop) {
     return time;
 }
 
-void time_stats(char *method, bool file, unsigned int wc, unsigned int fc, unsigned int mc, double load_time,
-                double check_time, double unload_time) {
+void time_stats(char *method, bool file, unsigned int word_count, unsigned int file_count, unsigned int misspelled_count, double load_time, double check_time, double unload_time) {
     double total_time = load_time + check_time + unload_time;
 
     if (!strcmp(method, "--TRIE")) {
@@ -125,7 +154,7 @@ void time_stats(char *method, bool file, unsigned int wc, unsigned int fc, unsig
         print_block("HASH");
     }
 
-    printf("WORDS IN DICTIONARY: %u\n", wc);
+    printf("WORDS IN DICTIONARY: %u\n", word_count);
     printf("TIME IN LOAD: %.2lf ms\n", load_time);
     printf("TIME IN CHECK: %.2lf ms\n", check_time);
     printf("TIME IN UNLOAD: %.2lf ms\n", unload_time);
@@ -133,10 +162,10 @@ void time_stats(char *method, bool file, unsigned int wc, unsigned int fc, unsig
 
     printf("\n");
     if (file) {
-        printf("WORDS IN FILE: %u\n", fc);
-        printf("MISSPELLED WORDS: %u\n", mc);
+        printf("WORDS IN FILE: %u\n", file_count);
+        printf("MISSPELLED WORDS: %u\n", misspelled_count);
     } else {
-        printf("SPELLING: %s\n", mc ? "VALID" : "INVALID");
+        printf("SPELLING: %s\n", misspelled_count ? "INVALID" : "VALID");
     }
 
     printf("\n");

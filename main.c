@@ -29,7 +29,6 @@ int main(int argc, char *argv[]) {
         }
         case 2: {
             // TODO: TRIE
-            // time_stats(args.method, process.is_this_a_file, process.wc, process.fc, process.mc, process.load_time, process.check_time, process.unload_time);
             break;
         }
         case 3: {
@@ -37,14 +36,13 @@ int main(int argc, char *argv[]) {
                 // TODO: TRIE
 
             } else {
-                hash_process process;
+                DATA data;
                 if (args.is_file) {
-                    process = hash_spell_check(args.is_file, args.file);
+                    data = hash_spell_check(args.is_file, args.file);
+                } else {
+                    data = hash_spell_check(args.is_file, args.word);
                 }
-                else {
-                    process = hash_spell_check(args.is_file, args.word);
-                }
-                time_stats(args.method, process.is_file, process.wc, process.fc, process.mc, process.load_time, process.check_time, process.unload_time);
+                time_stats(args.method, data.is_file, data.word_count, data.file_count, data.misspelled_count, data.load_time, data.check_time, data.unload_time);
             }
             break;
         }

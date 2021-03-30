@@ -34,19 +34,3 @@ string.h
 time.h
 -
 
-/home/adeshchoudhar/GitHub/Dictionary/main.c
-helpers.h
-/home/adeshchoudhar/GitHub/Dictionary/helpers.h
-trie.h
-/home/adeshchoudhar/GitHub/Dictionary/trie.h
-hash.h
-/home/adeshchoudhar/GitHub/Dictionary/hash.h
-
-/home/adeshchoudhar/GitHub/Dictionary/trie.c
-trie.h
-/home/adeshchoudhar/GitHub/Dictionary/trie.h
-
-/home/adeshchoudhar/GitHub/Dictionary/trie.h
-helpers.h
-/home/adeshchoudhar/GitHub/Dictionary/helpers.h
-

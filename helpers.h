@@ -6,7 +6,7 @@
 #define DICTIONARY_HELPERS_H
 
 #define DEFAULT "--TRIE"
-#define DICTIONARY "../dictionaries/words.txt"
+#define DICTIONARY "../dictionaries/large"
 #define MAX 45
 
 #include <stdio.h>
@@ -26,6 +26,16 @@ typedef struct {
     bool success;
 } ARGS;
 
+typedef struct {
+    bool is_file;
+    unsigned int word_count;
+    unsigned int file_count;
+    unsigned int misspelled_count;
+    double load_time;
+    double check_time;
+    double unload_time;
+} DATA;
+
 bool is_this_a_file(char *);
 
 ARGS parse_arguments(int, char *[]);
@@ -34,9 +44,11 @@ void print_block(char *block_name);
 
 void help();
 
-void get_meanings(char []);
+void get_meanings(const char []);
 
-void clean_word(char []);
+bool is_number(char []);
+
+void clean(char []);
 
 double get_time(clock_t, clock_t);
 

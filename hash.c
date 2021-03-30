@@ -5,7 +5,7 @@
 #include "hash.h"
 
 void hash_init() {
-    for (int i = 0; i < N; i++) {
+    for (int i = 0; i < H; i++) {
         HASH[i] = NULL;
     }
 }
@@ -16,14 +16,10 @@ unsigned int hash_index(char *word) {
     for (unsigned int i = 0, n = strlen(word); i < n; i++) {
         hash = (hash << 2) ^ word[i];
     }
-    return hash % N;
+    return hash % H;
 }
 
-unsigned int hc = 0;
-
-unsigned int hash_count() {
-    return hc;
-}
+unsigned int hash_count = 0;
 
 bool hash_load(char *dictionary) {
     FILE *file = fopen(dictionary, "r");
@@ -44,11 +40,11 @@ bool hash_load(char *dictionary) {
 
         if (HASH[hi] == NULL) {
             HASH[hi] = node;
-            hc++;
+            hash_count++;
         } else {
             node->next = HASH[hi];
             HASH[hi] = node;
-            hc++;
+            hash_count++;
         }
     }
 
@@ -57,13 +53,13 @@ bool hash_load(char *dictionary) {
 }
 
 bool hash_check(char *word) {
-    for (int i = 0; i < MAX + 1; i++) {
-        word[i] = (char)tolower(word[i]);
+    for (int i = 0; word[i] != '\0'; i++) {
+        word[i] = (char) tolower(word[i]);
     }
-    unsigned int hi = hash_index(word);
+    unsigned int index = hash_index(word);
 
-    hash_node *current_node = HASH[hi];
-    while(current_node) {
+    hash_node *current_node = HASH[index];
+    while (current_node) {
         if (!strcmp(current_node->word, word)) {
             return true;
         }
@@ -73,7 +69,7 @@ bool hash_check(char *word) {
 }
 
 bool hash_unload() {
-    for (int i = 0; i < N; i++) {
+    for (int i = 0; i < H; i++) {
         hash_node *current_node = HASH[i];
         if (current_node == NULL) {
             continue;
@@ -89,18 +85,16 @@ bool hash_unload() {
     return true;
 }
 
-hash_process hash_spell_check(bool is_file, char *input) {
-    unsigned int wc = 0, fc = 0, mc = 0;
-    clock_t load_start = 0, load_stop = 0, check_start = 0, check_stop = 0, unload_start = 0, unload_stop = 0;
-    double load_time = 0, check_time = 0, unload_time = 0;
+DATA hash_spell_check(bool is_file, char *input) {
+    unsigned int file_count = 0, misspelled_count = 0;
+    clock_t load_start, load_stop, check_start, check_stop, unload_start, unload_stop;
+    double load_time, check_time, unload_time;
 
     hash_init();
 
     load_start = clock();
     hash_load(DICTIONARY);
     load_stop = clock();
-
-    wc = hash_count();
 
     check_start = clock();
     if (is_file) {
@@ -117,19 +111,18 @@ hash_process hash_spell_check(bool is_file, char *input) {
         char word[MAX + 1];
         int index = 0, c;
         for (c = fgetc(input_file); c != EOF; c = fgetc(input_file)) {
-            if (isalnum(c) || c == '\'' || c == '-') {
-                word[index++] = (char)tolower(c);
-            }
-            else if ((c == ' ' && index) || (c == '\n' && index)) {
+            if (isalnum(c) || c == '\'' || c == '-' || c == '.' || c == '\\') {
+                word[index++] = (char) tolower(c);
+            } else if ((c == ' ' && index) || (c == '\n' && index)) {
                 word[index] = '\0';
-                fc += 1;
+                file_count += 1;
                 index = 0;
 
-                clean_word(word);
+                clean(word);
 
                 if (!hash_check(word)) {
                     fprintf(output_file, "%s\n", word);
-                    mc += 1;
+                    misspelled_count += 1;
                 }
             }
 
@@ -141,7 +134,19 @@ hash_process hash_spell_check(bool is_file, char *input) {
         fclose(input_file);
         fclose(output_file);
     } else {
-        mc = !hash_check(input);
+        char word[MAX + 1], c;
+        int index = 0;
+        for (; input[index] != '\0' && index < MAX; index++) {
+            c = input[index];
+            if (isalnum(c) || c == '\'' || c == '-' || c == '.' || c == '\\') {
+                word[index] = input[index];
+            }
+        }
+        word[index] = '\0';
+
+        clean(word);
+
+        misspelled_count = !hash_check(word);
     }
     check_stop = clock();
 
@@ -153,7 +158,7 @@ hash_process hash_spell_check(bool is_file, char *input) {
     check_time = get_time(check_start, check_stop);
     unload_time = get_time(unload_start, unload_stop);
 
-    hash_process hp = {is_file, wc, fc, mc, load_time, check_time, unload_time};
+    DATA data = {is_file, hash_count, file_count, misspelled_count, load_time, check_time, unload_time};
 
-    return hp;
+    return data;
 }

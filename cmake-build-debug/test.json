@@ -1,0 +1,549 @@
+{
+    "id": "practice",
+    "metadata": {
+        "operation": "retrieve",
+        "provider": "Oxford University Press",
+        "schema": "RetrieveEntry"
+    },
+    "results": [
+        {
+            "id": "practice",
+            "language": "en-gb",
+            "lexicalEntries": [
+                {
+                    "entries": [
+                        {
+                            "etymologies": [
+                                "late Middle English: from practise, on the pattern of pairs such as advise, advice"
+                            ],
+                            "grammaticalFeatures": [
+                                {
+                                    "id": "mass",
+                                    "text": "Mass",
+                                    "type": "Countability"
+                                }
+                            ],
+                            "notes": [
+                                {
+                                    "text": "Care should be taken with the use of the words practice and practise as there are differences in British and US usage. Practice is the correct spelling for the noun in both British and US English and it is also the spelling of the verb in US English. However, in British English the verb should be spelled practise",
+                                    "type": "editorialNote"
+                                }
+                            ],
+                            "pronunciations": [
+                                {
+                                    "audioFile": "https://audio.oxforddictionaries.com/en/mp3/practice_gb_1.mp3",
+                                    "dialects": [
+                                        "British English"
+                                    ],
+                                    "phoneticNotation": "IPA",
+                                    "phoneticSpelling": "ˈpraktɪs"
+                                }
+                            ],
+                            "senses": [
+                                {
+                                    "definitions": [
+                                        "the actual application or use of an idea, belief, or method, as opposed to theories relating to it"
+                                    ],
+                                    "examples": [
+                                        {
+                                            "text": "the principles and practice of teaching"
+                                        },
+                                        {
+                                            "text": "the recommendations proved too expensive to put into practice"
+                                        }
+                                    ],
+                                    "id": "m_en_gbus0807180.004",
+                                    "semanticClasses": [
+                                        {
+                                            "id": "action",
+                                            "text": "Action"
+                                        }
+                                    ],
+                                    "shortDefinitions": [
+                                        "actual application or use of idea"
+                                    ],
+                                    "subsenses": [
+                                        {
+                                            "definitions": [
+                                                "the carrying out or exercise of a profession, especially that of a doctor or lawyer"
+                                            ],
+                                            "examples": [
+                                                {
+                                                    "text": "he abandoned medical practice for the Church"
+                                                }
+                                            ],
+                                            "id": "m_en_gbus0807180.006",
+                                            "semanticClasses": [
+                                                {
+                                                    "id": "professional_work",
+                                                    "text": "Professional_Work"
+                                                }
+                                            ],
+                                            "shortDefinitions": [
+                                                "carrying out of profession"
+                                            ],
+                                            "synonyms": [
+                                                {
+                                                    "language": "en",
+                                                    "text": "profession"
+                                                },
+                                                {
+                                                    "language": "en",
+                                                    "text": "career"
+                                                },
+                                                {
+                                                    "language": "en",
+                                                    "text": "business"
+                                                },
+                                                {
+                                                    "language": "en",
+                                                    "text": "work"
+                                                },
+                                                {
+                                                    "language": "en",
+                                                    "text": "pursuit"
+                                                },
+                                                {
+                                                    "language": "en",
+                                                    "text": "occupation"
+                                                },
+                                                {
+                                                    "language": "en",
+                                                    "text": "following"
+                                                }
+                                            ],
+                                            "thesaurusLinks": [
+                                                {
+                                                    "entry_id": "practice",
+                                                    "sense_id": "t_en_gb0011389.004"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "definitions": [
+                                                "the business or premises of a doctor or lawyer"
+                                            ],
+                                            "examples": [
+                                                {
+                                                    "text": "Dr Apps has a practice in Neasham Road"
+                                                }
+                                            ],
+                                            "id": "m_en_gbus0807180.007",
+                                            "notes": [
+                                                {
+                                                    "text": "count noun",
+                                                    "type": "grammaticalNote"
+                                                }
+                                            ],
+                                            "semanticClasses": [
+                                                {
+                                                    "id": "office",
+                                                    "text": "Office"
+                                                }
+                                            ],
+                                            "shortDefinitions": [
+                                                "business or premises of doctor or lawyer"
+                                            ],
+                                            "synonyms": [
+                                                {
+                                                    "language": "en",
+                                                    "text": "business"
+                                                },
+                                                {
+                                                    "language": "en",
+                                                    "text": "firm"
+                                                },
+                                                {
+                                                    "language": "en",
+                                                    "text": "office"
+                                                }
+                                            ],
+                                            "thesaurusLinks": [
+                                                {
+                                                    "entry_id": "practice",
+                                                    "sense_id": "t_en_gb0011389.005"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "synonyms": [
+                                        {
+                                            "language": "en",
+                                            "text": "application"
+                                        },
+                                        {
+                                            "language": "en",
+                                            "text": "exercise"
+                                        },
+                                        {
+                                            "language": "en",
+                                            "text": "use"
+                                        },
+                                        {
+                                            "language": "en",
+                                            "text": "operation"
+                                        },
+                                        {
+                                            "language": "en",
+                                            "text": "implementation"
+                                        },
+                                        {
+                                            "language": "en",
+                                            "text": "execution"
+                                        },
+                                        {
+                                            "language": "en",
+                                            "text": "enactment"
+                                        },
+                                        {
+                                            "language": "en",
+                                            "text": "action"
+                                        },
+                                        {
+                                            "language": "en",
+                                            "text": "doing"
+                                        },
+                                        {
+                                            "language": "en",
+                                            "text": "use"
+                                        },
+                                        {
+                                            "language": "en",
+                                            "text": "make use of"
+                                        },
+                                        {
+                                            "language": "en",
+                                            "text": "put to use"
+                                        },
+                                        {
+                                            "language": "en",
+                                            "text": "utilize"
+                                        },
+                                        {
+                                            "language": "en",
+                                            "text": "apply"
+                                        },
+                                        {
+                                            "language": "en",
+                                            "text": "employ"
+                                        },
+                                        {
+                                            "language": "en",
+                                            "text": "exercise"
+                                        },
+                                        {
+                                            "language": "en",
+                                            "text": "put into effect"
+                                        },
+                                        {
+                                            "language": "en",
+                                            "text": "put into operation"
+                                        },
+                                        {
+                                            "language": "en",
+                                            "text": "draw on"
+                                        },
+                                        {
+                                            "language": "en",
+                                            "text": "bring into play"
+                                        }
+                                    ],
+                                    "thesaurusLinks": [
+                                        {
+                                            "entry_id": "practice",
+                                            "sense_id": "t_en_gb0011389.001"
+                                        },
+                                        {
+                                            "entry_id": "put_something_into_practice",
+                                            "sense_id": "t_en_gb0011389.008"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "definitions": [
+                                        "the customary, habitual, or expected procedure or way of doing of something"
+                                    ],
+                                    "examples": [
+                                        {
+                                            "text": "product placement is common practice in American movies"
+                                        },
+                                        {
+                                            "notes": [
+                                                {
+                                                    "text": "count noun",
+                                                    "type": "grammaticalNote"
+                                                }
+                                            ],
+                                            "text": "modern child-rearing practices"
+                                        }
+                                    ],
+                                    "id": "m_en_gbus0807180.011",
+                                    "semanticClasses": [
+                                        {
+                                            "id": "practice",
+                                            "text": "Practice"
+                                        }
+                                    ],
+                                    "shortDefinitions": [
+                                        "customary way of doing something"
+                                    ],
+                                    "subsenses": [
+                                        {
+                                            "definitions": [
+                                                "an established method of legal procedure."
+                                            ],
+                                            "domainClasses": [
+                                                {
+                                                    "id": "law",
+                                                    "text": "Law"
+                                                }
+                                            ],
+                                            "id": "m_en_gbus0807180.012",
+                                            "semanticClasses": [
+                                                {
+                                                    "id": "practice",
+                                                    "text": "Practice"
+                                                }
+                                            ],
+                                            "shortDefinitions": [
+                                                "established method of legal procedure"
+                                            ]
+                                        }
+                                    ],
+                                    "synonyms": [
+                                        {
+                                            "language": "en",
+                                            "text": "custom"
+                                        },
+                                        {
+                                            "language": "en",
+                                            "text": "procedure"
+                                        },
+                                        {
+                                            "language": "en",
+                                            "text": "policy"
+                                        },
+                                        {
+                                            "language": "en",
+                                            "text": "convention"
+                                        },
+                                        {
+                                            "language": "en",
+                                            "text": "tradition"
+                                        },
+                                        {
+                                            "language": "en",
+                                            "text": "fashion"
+                                        },
+                                        {
+                                            "language": "en",
+                                            "text": "habit"
+                                        },
+                                        {
+                                            "language": "en",
+                                            "text": "wont"
+                                        },
+                                        {
+                                            "language": "en",
+                                            "text": "method"
+                                        },
+                                        {
+                                            "language": "en",
+                                            "text": "system"
+                                        },
+                                        {
+                                            "language": "en",
+                                            "text": "routine"
+                                        },
+                                        {
+                                            "language": "en",
+                                            "text": "institution"
+                                        },
+                                        {
+                                            "language": "en",
+                                            "text": "way"
+                                        },
+                                        {
+                                            "language": "en",
+                                            "text": "rule"
+                                        }
+                                    ],
+                                    "thesaurusLinks": [
+                                        {
+                                            "entry_id": "practice",
+                                            "sense_id": "t_en_gb0011389.002"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "definitions": [
+                                        "repeated exercise in or performance of an activity or skill so as to acquire or maintain proficiency in it"
+                                    ],
+                                    "examples": [
+                                        {
+                                            "text": "it must have taken a lot of practice to become so fluent"
+                                        }
+                                    ],
+                                    "id": "m_en_gbus0807180.014",
+                                    "semanticClasses": [
+                                        {
+                                            "id": "exercise",
+                                            "text": "Exercise"
+                                        }
+                                    ],
+                                    "shortDefinitions": [
+                                        "repeated exercise in an activity"
+                                    ],
+                                    "subsenses": [
+                                        {
+                                            "definitions": [
+                                                "a period of time spent practising an activity or skill"
+                                            ],
+                                            "examples": [
+                                                {
+                                                    "text": "daily choir practices"
+                                                }
+                                            ],
+                                            "id": "m_en_gbus0807180.015",
+                                            "notes": [
+                                                {
+                                                    "text": "count noun",
+                                                    "type": "grammaticalNote"
+                                                }
+                                            ],
+                                            "semanticClasses": [
+                                                {
+                                                    "id": "period",
+                                                    "text": "Period"
+                                                }
+                                            ],
+                                            "shortDefinitions": [
+                                                "period spent doing this"
+                                            ]
+                                        }
+                                    ],
+                                    "synonyms": [
+                                        {
+                                            "language": "en",
+                                            "text": "training"
+                                        },
+                                        {
+                                            "language": "en",
+                                            "text": "rehearsal"
+                                        },
+                                        {
+                                            "language": "en",
+                                            "text": "repetition"
+                                        },
+                                        {
+                                            "language": "en",
+                                            "text": "preparation"
+                                        },
+                                        {
+                                            "language": "en",
+                                            "text": "exercise"
+                                        },
+                                        {
+                                            "language": "en",
+                                            "text": "drill"
+                                        },
+                                        {
+                                            "language": "en",
+                                            "text": "study"
+                                        }
+                                    ],
+                                    "thesaurusLinks": [
+                                        {
+                                            "entry_id": "practice",
+                                            "sense_id": "t_en_gb0011389.003"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ],
+                    "language": "en-gb",
+                    "lexicalCategory": {
+                        "id": "noun",
+                        "text": "Noun"
+                    },
+                    "phrases": [
+                        {
+                            "id": "in_practice",
+                            "text": "in practice"
+                        },
+                        {
+                            "id": "out_of_practice",
+                            "text": "out of practice"
+                        },
+                        {
+                            "id": "practice_makes_perfect",
+                            "text": "practice makes perfect"
+                        }
+                    ],
+                    "text": "practice"
+                },
+                {
+                    "entries": [
+                        {
+                            "notes": [
+                                {
+                                    "text": "Care should be taken with the use of the words practice and practise as there are differences in British and US usage. Practice is the correct spelling for the noun in both British and US English and it is also the spelling of the verb in US English. However, in British English the verb should be spelled practise",
+                                    "type": "editorialNote"
+                                }
+                            ],
+                            "pronunciations": [
+                                {
+                                    "audioFile": "https://audio.oxforddictionaries.com/en/mp3/practice_gb_1.mp3",
+                                    "dialects": [
+                                        "British English"
+                                    ],
+                                    "phoneticNotation": "IPA",
+                                    "phoneticSpelling": "ˈpraktɪs"
+                                }
+                            ],
+                            "senses": [
+                                {
+                                    "crossReferenceMarkers": [
+                                        "US spelling of practise"
+                                    ],
+                                    "crossReferences": [
+                                        {
+                                            "id": "practise",
+                                            "text": "practise",
+                                            "type": "variant spelling of"
+                                        }
+                                    ],
+                                    "id": "m_en_gbus0807180.017"
+                                }
+                            ]
+                        }
+                    ],
+                    "language": "en-gb",
+                    "lexicalCategory": {
+                        "id": "verb",
+                        "text": "Verb"
+                    },
+                    "phrases": [
+                        {
+                            "id": "in_practice",
+                            "text": "in practice"
+                        },
+                        {
+                            "id": "out_of_practice",
+                            "text": "out of practice"
+                        },
+                        {
+                            "id": "practice_makes_perfect",
+                            "text": "practice makes perfect"
+                        }
+                    ],
+                    "text": "practice"
+                }
+            ],
+            "type": "headword",
+            "word": "practice"
+        }
+    ],
+    "word": "practice"
+}
