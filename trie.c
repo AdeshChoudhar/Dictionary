@@ -9,15 +9,17 @@ void trie_init() {
 }
 
 unsigned int trie_count = 0;
+unsigned long int trie_memory = 0;
 
 trie_node *new_trie_node() {
-    trie_node *new_node = (trie_node *)malloc(sizeof(trie_node));
+    trie_node *new_node = (trie_node *) malloc(sizeof(trie_node));
     if (!new_node) {
         trie_unload(TRIE);
         return NULL;
     }
-    new_node->end = false;
+    trie_memory += sizeof(trie_node);
 
+    new_node->end = false;
     for (int i = 0; i < T; i++) {
         new_node->children[i] = NULL;
     }
@@ -31,18 +33,14 @@ bool trie_load(char *dictionary) {
     }
     char word[MAX + 1];
     while (fscanf(file, "%s", word) != EOF) {
-        clean(word);
-
         trie_node *current_node = TRIE, *new_node;
         for (int i = 0, c; word[i] != '\0'; i++) {
-            c = (int)word[i];
-            if (48 <= c && c <=57) {
+            c = (int) word[i];
+            if (48 <= c && c <= 57) {
                 c -= 48;
-            }
-            else if (97 <= c && c <= 122) {
+            } else if (97 <= c && c <= 122) {
                 c -= 87;
-            }
-            else {
+            } else {
                 continue;
             }
 
@@ -67,14 +65,12 @@ bool trie_load(char *dictionary) {
 bool trie_check(const char *word) {
     trie_node *current_node = TRIE;
     for (int i = 0, c; word[i] != '\0'; i++) {
-        c = (int)word[i];
-        if (48 <= c && c <=57) {
+        c = (int) word[i];
+        if (48 <= c && c <= 57) {
             c -= 48;
-        }
-        else if (97 <= c && c <= 122) {
+        } else if (97 <= c && c <= 122) {
             c -= 87;
-        }
-        else {
+        } else {
             return false;
         }
 
@@ -177,6 +173,6 @@ DATA trie_spell_check(bool is_file, char *input) {
     check_time = get_time(check_start, check_stop);
     unload_time = get_time(unload_start, unload_stop);
 
-    DATA data = {is_file, trie_count, file_count, misspelled_count, load_time, check_time, unload_time};
+    DATA data = {is_file, trie_count, file_count, misspelled_count, load_time, check_time, unload_time, trie_memory};
     return data;
 }

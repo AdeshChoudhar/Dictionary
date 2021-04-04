@@ -20,6 +20,7 @@ unsigned int hash_index(char *word) {
 }
 
 unsigned int hash_count = 0;
+unsigned long int hash_memory = 0;
 
 bool hash_load(char *dictionary) {
     FILE *file = fopen(dictionary, "r");
@@ -34,10 +35,10 @@ bool hash_load(char *dictionary) {
             hash_unload();
             return false;
         }
+        hash_memory += sizeof(hash_node);
 
         strcpy(node->word, word);
         unsigned int hi = hash_index(word);
-
         if (HASH[hi] == NULL) {
             HASH[hi] = node;
         } else {
@@ -134,8 +135,8 @@ DATA hash_spell_check(bool is_file, char *input) {
         fclose(input_file);
         fclose(output_file);
     } else {
-        char word[MAX + 1], c;
         int index = 0;
+        char word[MAX + 1], c;
         for (; input[index] != '\0' && index < MAX; index++) {
             c = input[index];
             if (isalnum(c) || c == '\'' || c == '-' || c == '.' || c == '\\') {
@@ -158,7 +159,7 @@ DATA hash_spell_check(bool is_file, char *input) {
     check_time = get_time(check_start, check_stop);
     unload_time = get_time(unload_start, unload_stop);
 
-    DATA data = {is_file, hash_count, file_count, misspelled_count, load_time, check_time, unload_time};
+    DATA data = {is_file, hash_count, file_count, misspelled_count, load_time, check_time, unload_time, hash_memory};
 
     return data;
 }

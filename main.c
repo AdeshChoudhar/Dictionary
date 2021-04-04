@@ -47,7 +47,7 @@ int main(int argc, char *argv[]) {
                 } else {
                     data = trie_spell_check(args.is_file, args.word);
                 }
-                time_stats(args.method, data.is_file, data.word_count, data.file_count, data.misspelled_count, data.load_time, data.check_time, data.unload_time);
+                time_stats(args.method, data);
             } else {
                 DATA data;
                 if (args.is_file) {
@@ -55,7 +55,7 @@ int main(int argc, char *argv[]) {
                 } else {
                     data = hash_spell_check(args.is_file, args.word);
                 }
-                time_stats(args.method, data.is_file, data.word_count, data.file_count, data.misspelled_count, data.load_time, data.check_time, data.unload_time);
+                time_stats(args.method, data);
             }
             break;
         }

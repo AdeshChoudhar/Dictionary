@@ -33,6 +33,7 @@ typedef struct {
     double load_time;
     double check_time;
     double unload_time;
+    unsigned long int memory;
 } DATA;
 
 bool is_this_a_file(char *);
@@ -51,6 +52,6 @@ void clean(char []);
 
 double get_time(clock_t, clock_t);
 
-void time_stats(char *, bool file, unsigned int, unsigned int, unsigned int, double, double, double);
+void time_stats(char *, DATA);
 
 #endif //DICTIONARY_HELPERS_H

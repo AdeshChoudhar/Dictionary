@@ -5,8 +5,9 @@
 #include "helpers.h"
 
 bool is_this_a_file(char *file) {
-    if (access(file, F_OK) == -1)
+    if (access(file, F_OK) == -1) {
         return false;
+    }
     return true;
 }
 
@@ -100,6 +101,7 @@ bool is_number(const char word[]) {
 
 void clean(char word[]) {
     int i, j;
+
     for (i = 0; word[i] != '\0'; i++) {
         word[i] = (char) tolower(word[i]);
     }
@@ -146,8 +148,8 @@ double get_time(clock_t start, clock_t stop) {
     return time;
 }
 
-void time_stats(char *method, bool file, unsigned int word_count, unsigned int file_count, unsigned int misspelled_count, double load_time, double check_time, double unload_time) {
-    double total_time = load_time + check_time + unload_time;
+void time_stats(char *method, DATA data) {
+    double total_time = data.load_time + data.check_time + data.unload_time;
 
     if (!strcmp(method, "--TRIE")) {
         print_block("TRIE");
@@ -155,20 +157,21 @@ void time_stats(char *method, bool file, unsigned int word_count, unsigned int f
         print_block("HASH");
     }
 
-    printf("WORDS IN DICTIONARY: %u\n", word_count);
-    printf("TIME IN LOAD: %.2lf ms\n", load_time);
-    printf("TIME IN CHECK: %.2lf ms\n", check_time);
-    printf("TIME IN UNLOAD: %.2lf ms\n", unload_time);
-    printf("TOTAL TIME: %.2lf ms\n", total_time);
+    printf("WORDS IN DICTIONARY: %u\n\n", data.word_count);
 
-    printf("\n");
-    if (file) {
-        printf("WORDS IN FILE: %u\n", file_count);
-        printf("MISSPELLED WORDS: %u\n", misspelled_count);
-        printf("TEXT CORRECTNESS: %.2f%%\n", ((double)(file_count - misspelled_count) / file_count) * 100);
+    if (data.is_file) {
+        double text_correctness = ((double) (data.file_count - data.misspelled_count) / data.file_count) * 100;
+        printf("WORDS IN FILE: %u\n", data.file_count);
+        printf("MISSPELLED WORDS: %u\n", data.misspelled_count);
+        printf("TEXT CORRECTNESS: %.2f%%\n\n", text_correctness);
     } else {
-        printf("SPELLING: %s\n", misspelled_count ? "INVALID" : "VALID");
+        printf("SPELLING: %s\n\n", data.misspelled_count ? "INVALID" : "VALID");
     }
 
-    printf("\n");
+    printf("TIME IN LOAD: %.2lf ms\n", data.load_time);
+    printf("TIME IN CHECK: %.2lf ms\n", data.check_time);
+    printf("TIME IN UNLOAD: %.2lf ms\n", data.unload_time);
+    printf("TOTAL TIME: %.2lf ms\n\n", total_time);
+
+    printf("MEMORY: %.2lf MB\n\n", (double) (data.memory) / 1000000);
 }
