@@ -24,7 +24,7 @@ bool hash_load(char *);
 
 bool hash_check(char *);
 
-bool hash_unload();
+void hash_unload();
 
 DATA hash_spell_check(bool, char *);
 

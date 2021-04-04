@@ -26,7 +26,7 @@ ARGS parse_arguments(int argc, char *argv[]) {
             break;
         }
         case 3: {
-            if (!strcmp(argv[1], "-s")) {
+            if (!strcmp(argv[1], "-c")) {
                 if (is_this_a_file(argv[2])) {
                     args.is_file = true;
                     args.file = argv[2];
@@ -34,7 +34,6 @@ ARGS parse_arguments(int argc, char *argv[]) {
                     args.word = argv[2];
                 }
                 args.option = 2;
-                args.method = DEFAULT;
                 args.success = true;
             }
             break;
@@ -74,10 +73,8 @@ void help() {
     print_block("HELP");
     printf("<0> Usage: ./Dictionary\n");
     printf("<1> Usage: ./Dictionary [-h/--help]\n");
-    printf("<2> Usage: ./Dictionary -s [<word>/<file>]\n");
+    printf("<2> Usage: ./Dictionary -c [<word>/<file>]\n");
     printf("<3> Usage: ./Dictionary -s [--TRIE/--HASH] [<word>/<file>]\n");
-    printf("\n");
-    printf("* --TRIE would be DEFAULT.\n");
     printf("\n");
 }
 
@@ -92,7 +89,7 @@ void get_meanings(const char word[]) {
     system(command);
 }
 
-bool is_number(char word[]) {
+bool is_number(const char word[]) {
     for (int i = 0; word[i] != '\0'; i++) {
         if (!isdigit(word[i])) {
             return false;
@@ -103,6 +100,10 @@ bool is_number(char word[]) {
 
 void clean(char word[]) {
     int i, j;
+    for (i = 0; word[i] != '\0'; i++) {
+        word[i] = (char) tolower(word[i]);
+    }
+
     char word_copy[MAX + 1];
     for (i = 0, j = 0; word[i] != '\0'; i++) {
         if (isalnum(word[i])) {
@@ -164,6 +165,7 @@ void time_stats(char *method, bool file, unsigned int word_count, unsigned int f
     if (file) {
         printf("WORDS IN FILE: %u\n", file_count);
         printf("MISSPELLED WORDS: %u\n", misspelled_count);
+        printf("TEXT CORRECTNESS: %.2f%%\n", ((double)(file_count - misspelled_count) / file_count) * 100);
     } else {
         printf("SPELLING: %s\n", misspelled_count ? "INVALID" : "VALID");
     }

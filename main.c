@@ -28,13 +28,26 @@ int main(int argc, char *argv[]) {
             break;
         }
         case 2: {
-            // TODO: TRIE
+            DATA hash_data, trie_data;
+            if (args.is_file) {
+                hash_data = hash_spell_check(args.is_file, args.file);
+                trie_data = trie_spell_check(args.is_file, args.file);
+            } else {
+                hash_data = hash_spell_check(args.is_file, args.word);
+                trie_data = trie_spell_check(args.is_file, args.word);
+            }
+            // TODO: COMPARE
             break;
         }
         case 3: {
             if (!strcmp(args.method, "--TRIE")) {
-                // TODO: TRIE
-
+                DATA data;
+                if (args.is_file) {
+                    data = trie_spell_check(args.is_file, args.file);
+                } else {
+                    data = trie_spell_check(args.is_file, args.word);
+                }
+                time_stats(args.method, data.is_file, data.word_count, data.file_count, data.misspelled_count, data.load_time, data.check_time, data.unload_time);
             } else {
                 DATA data;
                 if (args.is_file) {

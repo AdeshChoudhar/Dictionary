@@ -40,12 +40,11 @@ bool hash_load(char *dictionary) {
 
         if (HASH[hi] == NULL) {
             HASH[hi] = node;
-            hash_count++;
         } else {
             node->next = HASH[hi];
             HASH[hi] = node;
-            hash_count++;
         }
+        hash_count++;
     }
 
     fclose(file);
@@ -53,9 +52,6 @@ bool hash_load(char *dictionary) {
 }
 
 bool hash_check(char *word) {
-    for (int i = 0; word[i] != '\0'; i++) {
-        word[i] = (char) tolower(word[i]);
-    }
     unsigned int index = hash_index(word);
 
     hash_node *current_node = HASH[index];
@@ -68,7 +64,7 @@ bool hash_check(char *word) {
     return false;
 }
 
-bool hash_unload() {
+void hash_unload() {
     for (int i = 0; i < H; i++) {
         hash_node *current_node = HASH[i];
         if (current_node == NULL) {
@@ -82,7 +78,6 @@ bool hash_unload() {
         }
         free(current_node);
     }
-    return true;
 }
 
 DATA hash_spell_check(bool is_file, char *input) {
@@ -93,7 +88,11 @@ DATA hash_spell_check(bool is_file, char *input) {
     hash_init();
 
     load_start = clock();
-    hash_load(DICTIONARY);
+    if (!hash_load(DICTIONARY)) {
+        print_block("ERR!");
+        printf("Dictionary could not be loaded!\n");
+        exit(1);
+    }
     load_stop = clock();
 
     check_start = clock();
@@ -105,15 +104,16 @@ DATA hash_spell_check(bool is_file, char *input) {
         FILE *input_file = fopen(input, "r");
         FILE *output_file = fopen("../misspelled.txt", "w");
         if (!input_file || !output_file) {
+            print_block("ERR!");
             printf("File could not be opened!\n");
         }
 
         char word[MAX + 1];
         int index = 0, c;
         for (c = fgetc(input_file); c != EOF; c = fgetc(input_file)) {
-            if (isalnum(c) || c == '\'' || c == '-' || c == '.' || c == '\\') {
+            if (isalnum(c) || c == '\'' || c == '.' || c == '\\' || c == '-') {
                 word[index++] = (char) tolower(c);
-            } else if ((c == ' ' && index) || (c == '\n' && index)) {
+            } else if ((c == ' ' && index) || (c == '\n' && index) /*|| (c == '-' && index)*/) {
                 word[index] = '\0';
                 file_count += 1;
                 index = 0;

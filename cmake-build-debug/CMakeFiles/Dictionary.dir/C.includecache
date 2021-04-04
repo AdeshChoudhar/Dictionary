@@ -6,18 +6,6 @@
 
 #IncludeRegexTransform: 
 
-/home/adeshchoudhar/GitHub/Dictionary/hash.c
-hash.h
-/home/adeshchoudhar/GitHub/Dictionary/hash.h
-
-/home/adeshchoudhar/GitHub/Dictionary/hash.h
-helpers.h
-/home/adeshchoudhar/GitHub/Dictionary/helpers.h
-
-/home/adeshchoudhar/GitHub/Dictionary/helpers.c
-helpers.h
-/home/adeshchoudhar/GitHub/Dictionary/helpers.h
-
 /home/adeshchoudhar/GitHub/Dictionary/helpers.h
 stdio.h
 -
@@ -33,4 +21,12 @@ string.h
 -
 time.h
 -
+
+/home/adeshchoudhar/GitHub/Dictionary/trie.c
+trie.h
+/home/adeshchoudhar/GitHub/Dictionary/trie.h
+
+/home/adeshchoudhar/GitHub/Dictionary/trie.h
+helpers.h
+/home/adeshchoudhar/GitHub/Dictionary/helpers.h
 

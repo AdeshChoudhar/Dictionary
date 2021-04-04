@@ -5,7 +5,6 @@
 #ifndef DICTIONARY_HELPERS_H
 #define DICTIONARY_HELPERS_H
 
-#define DEFAULT "--TRIE"
 #define DICTIONARY "../dictionaries/large"
 #define MAX 45
 
@@ -46,7 +45,7 @@ void help();
 
 void get_meanings(const char []);
 
-bool is_number(char []);
+bool is_number(const char []);
 
 void clean(char []);
 
