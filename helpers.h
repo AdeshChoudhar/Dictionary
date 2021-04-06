@@ -7,6 +7,7 @@
 
 #define DICTIONARY "../dictionaries/large"
 #define MAX 45
+#define GNUPLOT "gnuplot -persist"
 
 #include <stdio.h>
 #include <stdbool.h>
@@ -36,15 +37,15 @@ typedef struct {
     unsigned long int memory;
 } DATA;
 
-bool is_this_a_file(char *);
+bool check_file(char *);
 
-ARGS parse_arguments(int, char *[]);
+ARGS parse(int, char *[]);
 
 void print_block(char *block_name);
 
-void help();
+void meanings(const char []);
 
-void get_meanings(const char []);
+void help();
 
 bool is_number(const char []);
 
@@ -52,6 +53,8 @@ void clean(char []);
 
 double get_time(clock_t, clock_t);
 
-void time_stats(char *, DATA);
+void statistics(char *, DATA);
+
+void compare(DATA, DATA);
 
 #endif //DICTIONARY_HELPERS_H

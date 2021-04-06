@@ -112,7 +112,7 @@ DATA trie_spell_check(bool is_file, char *input) {
 
     check_start = clock();
     if (is_file) {
-        if (is_this_a_file("../misspelled.txt")) {
+        if (check_file("../misspelled.txt")) {
             system("rm ../misspelled.txt");
         }
 

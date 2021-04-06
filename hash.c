@@ -98,7 +98,7 @@ DATA hash_spell_check(bool is_file, char *input) {
 
     check_start = clock();
     if (is_file) {
-        if (is_this_a_file("../misspelled.txt")) {
+        if (check_file("../misspelled.txt")) {
             system("rm ../misspelled.txt");
         }
 
@@ -160,6 +160,5 @@ DATA hash_spell_check(bool is_file, char *input) {
     unload_time = get_time(unload_start, unload_stop);
 
     DATA data = {is_file, hash_count, file_count, misspelled_count, load_time, check_time, unload_time, hash_memory};
-
     return data;
 }

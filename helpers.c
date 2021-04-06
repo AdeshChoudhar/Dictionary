@@ -4,14 +4,14 @@
 
 #include "helpers.h"
 
-bool is_this_a_file(char *file) {
+bool check_file(char *file) {
     if (access(file, F_OK) == -1) {
         return false;
     }
     return true;
 }
 
-ARGS parse_arguments(int argc, char *argv[]) {
+ARGS parse(int argc, char *argv[]) {
     ARGS args = {.option = -1, .method = "", .word = "", .file = "", .is_file = false, .success = false};
     switch (argc) {
         case 1: {
@@ -27,29 +27,33 @@ ARGS parse_arguments(int argc, char *argv[]) {
             break;
         }
         case 3: {
-            if (!strcmp(argv[1], "-c")) {
-                if (is_this_a_file(argv[2])) {
+            if (!strcmp(argv[1], "-g")) {
+                args.word = argv[2];
+                args.option = 2;
+                args.success = true;
+            } else if (!strcmp(argv[1], "-c")) {
+                if (check_file(argv[2])) {
                     args.is_file = true;
                     args.file = argv[2];
                 } else {
                     args.word = argv[2];
                 }
-                args.option = 2;
+                args.option = 3;
                 args.success = true;
             }
             break;
         }
         case 4: {
             if (!strcmp(argv[1], "-s")) {
-                if (!strcmp(argv[2], "--TRIE") || !strcmp(argv[2], "--HASH")) {
-                    if (is_this_a_file(argv[3])) {
+                if (!strcmp(argv[2], "--HASH") || !strcmp(argv[2], "--TRIE")) {
+                    if (check_file(argv[3])) {
                         args.is_file = true;
                         args.file = argv[3];
                     } else {
                         args.word = argv[3];
                     }
                     args.method = argv[2];
-                    args.option = 3;
+                    args.option = 4;
                     args.success = true;
                 }
             }
@@ -70,16 +74,7 @@ void print_block(char *block_name) {
     printf("\n");
 }
 
-void help() {
-    print_block("HELP");
-    printf("<0> Usage: ./Dictionary\n");
-    printf("<1> Usage: ./Dictionary [-h/--help]\n");
-    printf("<2> Usage: ./Dictionary -c [<word>/<file>]\n");
-    printf("<3> Usage: ./Dictionary -s [--TRIE/--HASH] [<word>/<file>]\n");
-    printf("\n");
-}
-
-void get_meanings(const char word[]) {
+void meanings(const char word[]) {
     char command[MAX + 30 + 1] = {'p', 'y', 't', 'h', 'o', 'n', ' ', '.', '.', '/', 's', 'c', 'r', 'i', 'p', 't', 's',
                                   '/', 'm', 'e', 'a', 'n', 'i', 'n', 'g', 's', '.', 'p', 'y', ' '};
     for (int i = 0; i < MAX + 1; i++) {
@@ -88,6 +83,16 @@ void get_meanings(const char word[]) {
 
     printf("\n");
     system(command);
+}
+
+void help() {
+    print_block("HELP");
+    printf("<0> Usage: ./Dictionary\n");
+    printf("<1> Usage: ./Dictionary [-h/--help]\n");
+    printf("<2> Usage: ./Dictionary -g <word>\n");
+    printf("<3> Usage: ./Dictionary -c [<word>/<file>]\n");
+    printf("<4> Usage: ./Dictionary -s [--HASH/--TRIE] [<word>/<file>]\n");
+    printf("\n");
 }
 
 bool is_number(const char word[]) {
@@ -148,7 +153,7 @@ double get_time(clock_t start, clock_t stop) {
     return time;
 }
 
-void time_stats(char *method, DATA data) {
+void statistics(char *method, DATA data) {
     double total_time = data.load_time + data.check_time + data.unload_time;
 
     if (!strcmp(method, "--TRIE")) {
@@ -174,4 +179,63 @@ void time_stats(char *method, DATA data) {
     printf("TOTAL TIME: %.2lf ms\n\n", total_time);
 
     printf("MEMORY: %.2lf MB\n\n", (double) (data.memory) / 1000000);
+}
+
+void compare(DATA hash_data, DATA trie_data) {
+    if (check_file("../data/time.dat")) {
+        system("rm ../data/time.dat");
+    }
+    if (check_file("../data/memory.dat")) {
+        system("rm ../data/memory.dat");
+    }
+
+    FILE *time_file = fopen("../data/time.dat", "w");
+    FILE *memory_file = fopen("../data/memory.dat", "w");
+    FILE *time_gp = popen(GNUPLOT, "w");
+    FILE *memory_gp = popen(GNUPLOT, "w");
+    if (!time_file || !memory_file || !time_gp || !memory_gp) {
+        print_block("ERR!");
+        printf("File could not be opened!\n");
+    }
+
+    double hash_data_total_time, trie_data_total_time;
+    hash_data_total_time = hash_data.load_time + hash_data.check_time + hash_data.unload_time;
+    trie_data_total_time = trie_data.load_time + trie_data.check_time + trie_data.unload_time;
+
+    fprintf(time_file, "%lf %lf\n", 3.5, hash_data.load_time);
+    fprintf(time_file, "%lf %lf\n\n", 4.5, trie_data.load_time);
+    fprintf(time_file, "%lf %lf\n", 7.5, hash_data.check_time);
+    fprintf(time_file, "%lf %lf\n\n", 8.5, trie_data.check_time);
+    fprintf(time_file, "%lf %lf\n", 11.5, hash_data.unload_time);
+    fprintf(time_file, "%lf %lf\n\n", 12.5, trie_data.unload_time);
+    fprintf(time_file, "%lf %lf\n", 15.5, hash_data_total_time);
+    fprintf(time_file, "%lf %lf\n\n", 16.5, trie_data_total_time);
+
+    fprintf(memory_file, "%d %lu\n", 2, hash_data.memory);
+    fprintf(memory_file, "%d %lu\n", 4, trie_data.memory);
+
+    fprintf(time_gp, "set key default\n");
+    fprintf(time_gp, "set style fill solid\n");
+    fprintf(time_gp, "set boxwidth 1\n");
+    fprintf(time_gp, "set title 'Time Analysis'\n");
+    fprintf(time_gp, "set ylabel 'Time (in ms)'\n");
+    fprintf(time_gp, "set xrange [0:20]\n");
+    fprintf(time_gp, "set xtics ('load time' 4, 'check time' 8, 'unload time' 12, 'total time' 16,)\n");
+    fprintf(time_gp, "plot '../data/time.dat' every 2 using 1:2 with boxes ls 1 title 'HASH',"
+                     "'../data/time.dat' every 2::1 using 1:2 with boxes ls 2 title 'TRIE'\n");
+
+    fprintf(memory_gp, "set title 'Memory Analysis'\n");
+    fprintf(memory_gp, "set ylabel 'Memory (in bytes)'\n");
+    fprintf(memory_gp, "set xrange [0: 6]\n");
+    fprintf(memory_gp, "set xtics ('hash memory' 2, 'trie memory' 4,)\n");
+    fprintf(memory_gp, "set key default\n");
+    fprintf(memory_gp, "set boxwidth 0.5\n");
+    fprintf(memory_gp, "set style fill solid\n");
+    fprintf(memory_gp, "plot '../data/memory.dat' every 2 using 1:2 with boxes ls 1 title 'HASH', "
+                       "'../data/memory.dat' every 2::1 using 1:2 with boxes ls 2 title 'TRIE'\n");
+
+    fclose(time_file);
+    fclose(memory_file);
+    fclose(time_gp);
+    fclose(memory_gp);
 }

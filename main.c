@@ -2,12 +2,11 @@
 // Created by adeshchoudhar on 18/03/21.
 //
 
-#include "helpers.h"
 #include "trie.h"
 #include "hash.h"
 
 int main(int argc, char *argv[]) {
-    ARGS args = parse_arguments(argc, argv);
+    ARGS args = parse(argc, argv);
     if (!args.success) {
         print_block("ERR!");
         printf("HELP: ./Dictionary [-h/--help]\n\n");
@@ -20,7 +19,7 @@ int main(int argc, char *argv[]) {
             printf("word: ");
             scanf("%s", word);
 
-            get_meanings(word);
+            meanings(word);
             break;
         }
         case 1: {
@@ -28,6 +27,10 @@ int main(int argc, char *argv[]) {
             break;
         }
         case 2: {
+            // TODO: GUESS
+            break;
+        }
+        case 3: {
             DATA hash_data, trie_data;
             if (args.is_file) {
                 hash_data = hash_spell_check(args.is_file, args.file);
@@ -36,10 +39,10 @@ int main(int argc, char *argv[]) {
                 hash_data = hash_spell_check(args.is_file, args.word);
                 trie_data = trie_spell_check(args.is_file, args.word);
             }
-            // TODO: COMPARE
+            compare(hash_data, trie_data);
             break;
         }
-        case 3: {
+        case 4: {
             if (!strcmp(args.method, "--TRIE")) {
                 DATA data;
                 if (args.is_file) {
@@ -47,7 +50,7 @@ int main(int argc, char *argv[]) {
                 } else {
                     data = trie_spell_check(args.is_file, args.word);
                 }
-                time_stats(args.method, data);
+                statistics(args.method, data);
             } else {
                 DATA data;
                 if (args.is_file) {
@@ -55,7 +58,7 @@ int main(int argc, char *argv[]) {
                 } else {
                     data = hash_spell_check(args.is_file, args.word);
                 }
-                time_stats(args.method, data);
+                statistics(args.method, data);
             }
             break;
         }
