@@ -16,8 +16,10 @@ int main(int argc, char *argv[]) {
     switch (args.option) {
         case 0: {
             char word[MAX + 1];
-            printf("word: ");
+            printf("\nword: ");
             scanf("%s", word);
+
+            clean(word);
 
             meanings(word);
             break;
@@ -27,7 +29,7 @@ int main(int argc, char *argv[]) {
             break;
         }
         case 2: {
-            // TODO: GUESS
+            trie_guess(args.word);
             break;
         }
         case 3: {
@@ -39,25 +41,30 @@ int main(int argc, char *argv[]) {
                 hash_data = hash_spell_check(args.is_file, args.word);
                 trie_data = trie_spell_check(args.is_file, args.word);
             }
+
+            statistics("--HASH", hash_data);
+            printf("--------------------------------------------------------------------------------\n");
+            statistics("--TRIE", trie_data);
             compare(hash_data, trie_data);
             break;
         }
         case 4: {
+            DATA data;
             if (!strcmp(args.method, "--TRIE")) {
-                DATA data;
                 if (args.is_file) {
                     data = trie_spell_check(args.is_file, args.file);
                 } else {
                     data = trie_spell_check(args.is_file, args.word);
                 }
+
                 statistics(args.method, data);
             } else {
-                DATA data;
                 if (args.is_file) {
                     data = hash_spell_check(args.is_file, args.file);
                 } else {
                     data = hash_spell_check(args.is_file, args.word);
                 }
+
                 statistics(args.method, data);
             }
             break;

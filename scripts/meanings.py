@@ -22,7 +22,6 @@ if len(argv) == 2:
 else:
     print("Usage: python meanings.py <word>")
 
-
 # from PyDictionary import PyDictionary
 #
 # dictionary = PyDictionary()

@@ -26,6 +26,10 @@ bool trie_check(const char *);
 
 void trie_unload(trie_node *);
 
+void trie_traversal(trie_node *, const char *);
+
+void trie_guess(const char *);
+
 DATA trie_spell_check(bool, char *);
 
 #endif //DICTIONARY_TRIE_H

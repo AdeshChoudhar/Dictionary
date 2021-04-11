@@ -87,11 +87,11 @@ void meanings(const char word[]) {
 
 void help() {
     print_block("HELP");
-    printf("<0> Usage: ./Dictionary\n");
-    printf("<1> Usage: ./Dictionary [-h/--help]\n");
-    printf("<2> Usage: ./Dictionary -g <word>\n");
-    printf("<3> Usage: ./Dictionary -c [<word>/<file>]\n");
-    printf("<4> Usage: ./Dictionary -s [--HASH/--TRIE] [<word>/<file>]\n");
+    printf("<0> MEANINGS    = Usage: ./Dictionary\n");
+    printf("<1> HELP        = Usage: ./Dictionary [-h/--help]\n");
+    printf("<2> GUESS       = Usage: ./Dictionary -g <word>\n");
+    printf("<3> COMPARE     = Usage: ./Dictionary -c [<word>/<file>]\n");
+    printf("<4> SPELL-CHECK = Usage: ./Dictionary -s [--HASH/--TRIE] [<word>/<file>]\n");
     printf("\n");
 }
 
@@ -162,7 +162,7 @@ void statistics(char *method, DATA data) {
         print_block("HASH");
     }
 
-    printf("WORDS IN DICTIONARY: %u\n\n", data.word_count);
+    printf("\nWORDS IN DICTIONARY: %u\n\n", data.word_count);
 
     if (data.is_file) {
         double text_correctness = ((double) (data.file_count - data.misspelled_count) / data.file_count) * 100;
