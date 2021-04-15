@@ -5,13 +5,13 @@
 #include "trie.h"
 
 void trie_init() {
-    TRIE = new_trie_node();
+    TRIE = trie_new_node();
 }
 
 unsigned int trie_count = 0;
 unsigned long int trie_memory = 0;
 
-trie_node *new_trie_node() {
+trie_node *trie_new_node() {
     trie_node *new_node = (trie_node *) malloc(sizeof(trie_node));
     if (!new_node) {
         trie_unload(TRIE);
@@ -31,6 +31,7 @@ bool trie_load(char *dictionary) {
     if (!file) {
         return false;
     }
+
     char word[MAX + 1];
     while (fscanf(file, "%s", word) != EOF) {
         trie_node *current_node = TRIE, *new_node;
@@ -45,7 +46,7 @@ bool trie_load(char *dictionary) {
             }
 
             if (current_node->children[index] == NULL) {
-                new_node = new_trie_node();
+                new_node = trie_new_node();
                 if (!new_node) {
                     trie_unload(TRIE);
                     return false;
@@ -128,24 +129,22 @@ void trie_guess(const char *word) {
     trie_init();
 
     if (!trie_load(DICTIONARY)) {
-        print_block("ERR!");
-        printf("Dictionary could not be loaded!\n");
-        exit(1);
+        throw_error("Dictionary could not be loaded!");
     }
 
-    trie_node *prefix_head = TRIE, *prefix_head_parent = NULL;
-    char word_copy[MAX + 1];
-
+    trie_node *prefix_head = TRIE;
+    char word_copy[MAX + 1], c;
     int i, index;
-    char c;
     for (i = 0; word[i] != '\0'; i++) {
         c = word[i];
         index = (int) c;
+
         if (48 <= index && index <= 57) {
             index -= 48;
         } else if (97 <= index && index <= 122) {
             index -= 87;
         }
+
         if (prefix_head && prefix_head->children[index]) {
             prefix_head = prefix_head->children[index];
             word_copy[i] = (char) c;

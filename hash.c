@@ -10,7 +10,8 @@ void hash_init() {
     }
 }
 
-// From Github by 'choaimeloo'
+// Posted on reddit by 'delipity'
+// https://www.reddit.com/r/cs50/comments/1x6vc8/pset6_trie_vs_hashtable/cf9nlkn/
 unsigned int hash_index(char *word) {
     unsigned int hash = 0;
     for (unsigned int i = 0, n = strlen(word); i < n; i++) {

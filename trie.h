@@ -18,7 +18,7 @@ trie_node *TRIE;
 
 void trie_init();
 
-trie_node *new_trie_node();
+trie_node *trie_new_node();
 
 bool trie_load(char *);
 

@@ -4,24 +4,17 @@
 
 #include "helpers.h"
 
-bool check_file(char *file) {
-    if (access(file, F_OK) == -1) {
-        return false;
-    }
-    return true;
-}
-
 ARGS parse(int argc, char *argv[]) {
     ARGS args = {.option = -1, .method = "", .word = "", .file = "", .is_file = false, .success = false};
     switch (argc) {
         case 1: {
-            args.option = 0;
+            args.option = 1;
             args.success = true;
             break;
         }
         case 2: {
             if (!strcmp(argv[1], "-h") || !strcmp(argv[1], "--help")) {
-                args.option = 1;
+                args.option = 0;
                 args.success = true;
             }
             break;
@@ -38,7 +31,7 @@ ARGS parse(int argc, char *argv[]) {
                 } else {
                     args.word = argv[2];
                 }
-                args.option = 3;
+                args.option = 4;
                 args.success = true;
             }
             break;
@@ -53,7 +46,7 @@ ARGS parse(int argc, char *argv[]) {
                         args.word = argv[3];
                     }
                     args.method = argv[2];
-                    args.option = 4;
+                    args.option = 3;
                     args.success = true;
                 }
             }
@@ -66,42 +59,25 @@ ARGS parse(int argc, char *argv[]) {
     return args;
 }
 
+bool check_file(char *file) {
+    if (access(file, F_OK) == -1) {
+        return false;
+    }
+    return true;
+}
+
+void throw_error(char *error_message) {
+    print_block("ERR!");
+    printf("%s\n\n", error_message);
+    exit(1);
+}
+
 void print_block(char *block_name) {
     printf("\n");
     printf("+===========+\n");
     printf("|   %s    |\n", block_name);
     printf("+===========+\n");
     printf("\n");
-}
-
-void meanings(const char word[]) {
-    char command[MAX + 30 + 1] = {'p', 'y', 't', 'h', 'o', 'n', ' ', '.', '.', '/', 's', 'c', 'r', 'i', 'p', 't', 's',
-                                  '/', 'm', 'e', 'a', 'n', 'i', 'n', 'g', 's', '.', 'p', 'y', ' '};
-    for (int i = 0; i < MAX + 1; i++) {
-        command[30 + i] = word[i];
-    }
-
-    printf("\n");
-    system(command);
-}
-
-void help() {
-    print_block("HELP");
-    printf("<0> MEANINGS    = Usage: ./Dictionary\n");
-    printf("<1> HELP        = Usage: ./Dictionary [-h/--help]\n");
-    printf("<2> GUESS       = Usage: ./Dictionary -g <word>\n");
-    printf("<3> COMPARE     = Usage: ./Dictionary -c [<word>/<file>]\n");
-    printf("<4> SPELL-CHECK = Usage: ./Dictionary -s [--HASH/--TRIE] [<word>/<file>]\n");
-    printf("\n");
-}
-
-bool is_number(const char word[]) {
-    for (int i = 0; word[i] != '\0'; i++) {
-        if (!isdigit(word[i])) {
-            return false;
-        }
-    }
-    return true;
 }
 
 void clean(char word[]) {
@@ -121,6 +97,7 @@ void clean(char word[]) {
         word_copy[j++] = 'a';
     }
     word_copy[j] = '\0';
+
     strcpy(word, word_copy);
 
     int length;
@@ -146,6 +123,36 @@ void clean(char word[]) {
             return;
         }
     }
+}
+
+void meanings(const char word[]) {
+    char command[MAX + 30 + 1] = {'p', 'y', 't', 'h', 'o', 'n', ' ', '.', '.', '/', 's', 'c', 'r', 'i', 'p', 't', 's',
+                                  '/', 'm', 'e', 'a', 'n', 'i', 'n', 'g', 's', '.', 'p', 'y', ' '};
+    for (int i = 0; i < MAX + 1; i++) {
+        command[30 + i] = word[i];
+    }
+
+    printf("\n");
+    system(command);
+}
+
+void help() {
+    print_block("HELP");
+    printf("<0> HELP        = Usage: ./Dictionary [-h/--help]\n");
+    printf("<1> MEANINGS    = Usage: ./Dictionary\n");
+    printf("<2> GUESS       = Usage: ./Dictionary -g <word>\n");
+    printf("<3> SPELL-CHECK = Usage: ./Dictionary -s [--HASH/--TRIE] [<word>/<file>]\n");
+    printf("<4> COMPARE     = Usage: ./Dictionary -c [<word>/<file>]\n");
+    printf("\n");
+}
+
+bool is_number(const char word[]) {
+    for (int i = 0; word[i] != '\0'; i++) {
+        if (!isdigit(word[i])) {
+            return false;
+        }
+    }
+    return true;
 }
 
 double get_time(clock_t start, clock_t stop) {
@@ -182,6 +189,10 @@ void statistics(char *method, DATA data) {
 }
 
 void compare(DATA hash_data, DATA trie_data) {
+    statistics("--HASH", hash_data);
+    printf("--------------------------------------------------------------------------------\n");
+    statistics("--TRIE", trie_data);
+
     if (check_file("../data/time.dat")) {
         system("rm ../data/time.dat");
     }
