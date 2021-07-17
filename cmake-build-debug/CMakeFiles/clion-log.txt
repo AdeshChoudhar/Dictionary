@@ -1,4 +1,0 @@
-/home/adeshchoudhar/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/211.7628.27/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/adeshchoudhar/GitHub/Dictionary
--- Configuring done
--- Generating done
--- Build files have been written to: /home/adeshchoudhar/GitHub/Dictionary/cmake-build-debug
