@@ -6,14 +6,23 @@ Dictionary is a project written majorly in C along with a minimal Python script.
 Takes help of a text file as a knowledge base (DICTIONARY) and performs various functions depending upon command-line
 arguments and input
 
-### How to use?
+## Prerequisites
 
-First change our directory to root directory of the project, then
+- gcc-11
+- cmake (>=3.17)
 
-> cd cmake-build-debug <br/>
+
+## Usage
+
+First change the directory to the root directory of project, then
+
+> mkdir cmake-build <br/>
+> cd cmake-build <br/>
+> cmake .. <br/>
+> make <br/>
 > ./Dictionary -h
 
-This will provide you all the help page/valid commands shown as below for using various features of Dictionary.
+This will provide you all the help page or valid commands as shown below for using various features of Dictionary.
 
 ```
 +===========+
@@ -27,44 +36,47 @@ This will provide you all the help page/valid commands shown as below for using 
 <4> COMPARE     = Usage: ./Dictionary -c [<word>/<file>]
 ```
 
-Use appropriate commands for respective features.
+Use these commands for respective features.
 
-### Features
+## Features
 
-- MEANING:<br/>
-  Basic functionality of providing meaning of a word. Only the API call part of getting meaning is handled by a Python
-  Script. The external API used is:<br/>
+- ### MEANING:<br/>
+  Basic functionality of providing meaning of a word. Only the API call part is handled by a Python
+  Script. The free external API used here is:<br/>
 
 > https://dictionaryapi.dev/
 
-- GUESS:<br/>
+- ### GUESS:<br/>
+
   Suggests words according to longest valid prefix in input argument.<br/>
-  Uses ```TRIE``` data structure to perform this feature.<br/><br/>
+  Uses `TRIE` data structure to perform this feature.<br/><br/>
 
-- SPELL-CHECK:<br>
-  Takes extra compulsory option ```--HASH``` or ```--TRIE``` to select respective data structure.<br/>
+- ### SPELL-CHECK:<br>
+
+  Takes extra compulsory option `--HASH` or `--TRIE` to select respective data structure.<br/>
   Displays various parameters regarding time and memory.<br/>
-    - If inputted a word checks validity/spelling of that word.<br/>
-    - If inputted a file checks spelling of all the words and list down all the misspelled words
-      in [misspelled.txt](misspelled.txt)<br/><br/>
 
-- COMPARE:<br/>
-  Compares and helps us visualize how much time and memory is used while performing spell-checking process. Gives a
-  complete analysis and statistics in terminal and visualization is done by graphs using ```gnuplot``` pipeline
+  - If inputted a word checks validity/spelling of that word.<br/>
+  - If inputted a file checks spelling of all the words and list down all the misspelled words
+    in [misspelled.txt](misspelled.txt)<br/><br/>
 
-### Structure of Project
+- ### COMPARE:<br/>
+  Compares and helps to visualize how much time and memory is used while performing spell-checking process. Gives a
+  complete analysis and statistics in terminal and visualization is done by graphs using `gnuplot` pipeline
+
+## Structure of Project
 
 ![structure](media/structure.png)
 
-### PPT
+## PPT
 
-[Dictionary](media/Dictionary.pptx)
+[Dictionary](Dictionary.pptx)
 
-### Mentor
+## Mentor
 
 Srida Kalamkar Ma'am
 
-### Author
+## Author
 
 Adesh Shahadeo Choudhar<br/>
 MIS: 111903008
