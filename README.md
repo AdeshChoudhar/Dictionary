@@ -3,14 +3,13 @@
 ## DSA Mini Project
 
 Dictionary is a project written majorly in C along with a minimal Python script.<br/><br/>
-Takes help of a text file as a knowledge base (DICTIONARY) and performs various functions depending upon command-line
-arguments and input
+It takes help of a text file as a knowledge base (DICTIONARY). After processing that data, depending upon command-line
+arguments and user input it performs respective functions.
 
 ## Prerequisites
 
 - gcc-11
 - cmake (>=3.17)
-
 
 ## Usage
 
@@ -41,14 +40,14 @@ Use these commands for respective features.
 ## Features
 
 - ### MEANING:<br/>
-  Basic functionality of providing meaning of a word. Only the API call part is handled by a Python
-  Script. The free external API used here is:<br/>
+  Basic functionality of providing meaning of a word. The Python script is handling only the API call part. The free
+  external API used here is:<br/>
 
 > https://dictionaryapi.dev/
 
 - ### GUESS:<br/>
 
-  Suggests words according to longest valid prefix in input argument.<br/>
+  Suggest words according to the longest valid prefix in input argument.<br/>
   Uses `TRIE` data structure to perform this feature.<br/><br/>
 
 - ### SPELL-CHECK:<br>
@@ -56,13 +55,13 @@ Use these commands for respective features.
   Takes extra compulsory option `--HASH` or `--TRIE` to select respective data structure.<br/>
   Displays various parameters regarding time and memory.<br/>
 
-  - If inputted a word checks validity/spelling of that word.<br/>
-  - If inputted a file checks spelling of all the words and list down all the misspelled words
-    in [misspelled.txt](misspelled.txt)<br/><br/>
+    - If inputted a word, it checks validity/spelling of that word.<br/>
+    - If inputted a file, it checks spelling of all the words and list down all the misspelled words
+      in [misspelled.txt](misspelled.txt)<br/><br/>
 
 - ### COMPARE:<br/>
-  Compares and helps to visualize how much time and memory is used while performing spell-checking process. Gives a
-  complete analysis and statistics in terminal and visualization is done by graphs using `gnuplot` pipeline
+  Compares and helps to visualize time and memory required while performing spell-checking process. Gives a complete
+  analysis and statistics in terminal and visualization with by graphs using `gnuplot` pipeline
 
 ## Structure of Project
 
@@ -70,7 +69,7 @@ Use these commands for respective features.
 
 ## PPT
 
-[Dictionary](Dictionary.pptx)
+[Dictionary](media/Dictionary.pptx)
 
 ## Mentor
 

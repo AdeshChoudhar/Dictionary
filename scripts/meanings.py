@@ -1,6 +1,5 @@
-from sys import argv
-
 import requests
+from sys import argv
 
 if len(argv) == 2:
     print(f"MEANING OF WORD '{argv[1]}':\n")
