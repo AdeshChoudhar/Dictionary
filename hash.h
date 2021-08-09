@@ -17,13 +17,12 @@ typedef struct hash_node {
 hash_node *HASH[H];
 
 void hash_init();
+hash_node *hash_new_node();
 
 unsigned int hash_index(char *);
 
 bool hash_load(char *);
-
 bool hash_check(char *);
-
 void hash_unload();
 
 DATA hash_spell_check(bool, char *);

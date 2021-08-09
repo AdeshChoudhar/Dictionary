@@ -19,4 +19,4 @@ if len(argv) == 2:
     else:
         print("NOT FOUND!\n")
 else:
-    print("Usage: python meanings.py <word>")
+    print("Usage: python meaning.py <word>")

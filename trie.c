@@ -45,7 +45,7 @@ bool trie_load(char *dictionary) {
                 continue;
             }
 
-            if (current_node->children[index] == NULL) {
+            if (!current_node->children[index]) {
                 new_node = trie_new_node();
                 if (!new_node) {
                     trie_unload(TRIE);
@@ -56,7 +56,7 @@ bool trie_load(char *dictionary) {
             current_node = current_node->children[index];
         }
         current_node->end = true;
-        trie_count++;
+        trie_count += 1;
     }
 
     fclose(file);
@@ -75,21 +75,18 @@ bool trie_check(const char *word) {
             return false;
         }
 
-        if (current_node->children[index] == NULL) {
+        if (!current_node->children[index]) {
             return false;
         }
         current_node = current_node->children[index];
     }
 
-    if (current_node != NULL && current_node->end) {
-        return true;
-    }
-    return false;
+    return (current_node && current_node->end);
 }
 
 void trie_unload(trie_node *node) {
     for (int i = 0; i < T; i++) {
-        if (node->children[i] != NULL) {
+        if (node->children[i]) {
             trie_unload(node->children[i]);
         }
     }
@@ -97,8 +94,8 @@ void trie_unload(trie_node *node) {
 }
 
 void trie_traversal(trie_node *head, const char *word) {
-    char word_copy[MAX + 1], c;
     int length;
+    char word_copy[MAX + 1];
     for (length = 0; word[length] != '\0'; length++) {
         word_copy[length] = word[length];
     }
@@ -108,6 +105,7 @@ void trie_traversal(trie_node *head, const char *word) {
         printf("%s\n", word_copy);
     }
 
+    char c;
     for (int i = 0; i < T; i++) {
         if (head->children[i]) {
             if (i < 10) {
@@ -119,7 +117,6 @@ void trie_traversal(trie_node *head, const char *word) {
             word_copy[length + 1] = '\0';
 
             trie_traversal(head->children[i], word_copy);
-
             strcpy(word_copy, word);
         }
     }
@@ -133,12 +130,11 @@ void trie_guess(const char *word) {
     }
 
     trie_node *prefix_head = TRIE;
-    char word_copy[MAX + 1], c;
-    int i, index;
-    for (i = 0; word[i] != '\0'; i++) {
-        c = word[i];
-        index = (int) c;
 
+    int i, index;
+    char word_copy[MAX + 1];
+    for (i = 0; word[i] != '\0'; i++) {
+        index = (int) word[i];
         if (48 <= index && index <= 57) {
             index -= 48;
         } else if (97 <= index && index <= 122) {
@@ -147,7 +143,7 @@ void trie_guess(const char *word) {
 
         if (prefix_head && prefix_head->children[index]) {
             prefix_head = prefix_head->children[index];
-            word_copy[i] = (char) c;
+            word_copy[i] = (char) word[i];
         } else {
             break;
         }
@@ -156,11 +152,9 @@ void trie_guess(const char *word) {
     printf("\nVALID PREFIX: %s\n\n", word_copy);
 
     printf("DID YOU MEAN?\n\n");
-
     trie_traversal(prefix_head, word_copy);
 
     printf("\n");
-
     trie_unload(TRIE);
 }
 
@@ -173,9 +167,7 @@ DATA trie_spell_check(bool is_file, char *input) {
 
     load_start = clock();
     if (!trie_load(DICTIONARY)) {
-        print_block("ERR!");
-        printf("Dictionary could not be loaded!\n");
-        exit(1);
+        throw_error("Dictionary could not be loaded!");
     }
     load_stop = clock();
 
@@ -188,28 +180,24 @@ DATA trie_spell_check(bool is_file, char *input) {
         FILE *input_file = fopen(input, "r");
         FILE *output_file = fopen("../misspelled.txt", "w");
         if (!input_file || !output_file) {
-            print_block("ERR!");
-            printf("File could not be opened!\n");
+            throw_error("File could not be opened!");
         }
 
-        char word[MAX + 1];
         int index = 0, c;
+        char word[MAX + 1];
         for (c = fgetc(input_file); c != EOF; c = fgetc(input_file)) {
             if (isalnum(c) || c == '\'' || c == '.' || c == '\\' || c == '-') {
                 word[index++] = (char) tolower(c);
             } else if ((c == ' ' && index) || (c == '\n' && index)) {
                 word[index] = '\0';
-                file_count += 1;
-                index = 0;
-
                 clean(word);
-
                 if (!trie_check(word)) {
                     fprintf(output_file, "%s\n", word);
                     misspelled_count += 1;
                 }
+                index = 0;
+                file_count += 1;
             }
-
             if (index > MAX) {
                 for (c = fgetc(input_file); c != EOF; c = fgetc(input_file));
             }
@@ -218,8 +206,8 @@ DATA trie_spell_check(bool is_file, char *input) {
         fclose(input_file);
         fclose(output_file);
     } else {
-        char word[MAX + 1], c;
         int index = 0;
+        char word[MAX + 1], c;
         for (; input[index] != '\0' && index < MAX; index++) {
             c = input[index];
             if (isalnum(c) || c == '\'' || c == '-' || c == '.' || c == '\\') {
@@ -227,9 +215,7 @@ DATA trie_spell_check(bool is_file, char *input) {
             }
         }
         word[index] = '\0';
-
         clean(word);
-
         misspelled_count = !trie_check(word);
     }
     check_stop = clock();

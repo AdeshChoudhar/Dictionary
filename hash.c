@@ -10,18 +10,30 @@ void hash_init() {
     }
 }
 
+unsigned long hash_count = 0;
+unsigned long hash_memory = 0;
+
+hash_node *hash_new_node() {
+    hash_node *new_node = malloc(sizeof(hash_node));
+    if (!new_node) {
+        hash_unload();
+        return NULL;
+    }
+    hash_memory += sizeof(hash_node);
+
+    new_node->next = NULL;
+    return new_node;
+}
+
 // Posted on reddit by 'delipity'
 // https://www.reddit.com/r/cs50/comments/1x6vc8/pset6_trie_vs_hashtable/cf9nlkn/
 unsigned int hash_index(char *word) {
     unsigned int hash = 0;
-    for (unsigned int i = 0, n = strlen(word); i < n; i++) {
+    for (int i = 0, n = (int) strlen(word); i < n; i++) {
         hash = (hash << 2) ^ word[i];
     }
     return hash % H;
 }
-
-unsigned int hash_count = 0;
-unsigned long int hash_memory = 0;
 
 bool hash_load(char *dictionary) {
     FILE *file = fopen(dictionary, "r");
@@ -31,22 +43,20 @@ bool hash_load(char *dictionary) {
 
     char word[MAX + 1];
     while (fscanf(file, "%s", word) != EOF) {
-        hash_node *node = malloc(sizeof(hash_node));
+        hash_node *node = hash_new_node();
         if (!node) {
             hash_unload();
             return false;
         }
-        hash_memory += sizeof(hash_node);
-
         strcpy(node->word, word);
         unsigned int hi = hash_index(word);
-        if (HASH[hi] == NULL) {
+        if (!HASH[hi]) {
             HASH[hi] = node;
         } else {
             node->next = HASH[hi];
             HASH[hi] = node;
         }
-        hash_count++;
+        hash_count += 1;
     }
 
     fclose(file);
@@ -55,7 +65,6 @@ bool hash_load(char *dictionary) {
 
 bool hash_check(char *word) {
     unsigned int index = hash_index(word);
-
     hash_node *current_node = HASH[index];
     while (current_node) {
         if (!strcmp(current_node->word, word)) {
@@ -69,10 +78,9 @@ bool hash_check(char *word) {
 void hash_unload() {
     for (int i = 0; i < H; i++) {
         hash_node *current_node = HASH[i];
-        if (current_node == NULL) {
+        if (!current_node) {
             continue;
         }
-
         while (current_node->next) {
             hash_node *tmp = current_node;
             current_node = current_node->next;
@@ -91,9 +99,7 @@ DATA hash_spell_check(bool is_file, char *input) {
 
     load_start = clock();
     if (!hash_load(DICTIONARY)) {
-        print_block("ERR!");
-        printf("Dictionary could not be loaded!\n");
-        exit(1);
+        throw_error("Dictionary could not be loaded!\n");
     }
     load_stop = clock();
 
@@ -106,8 +112,7 @@ DATA hash_spell_check(bool is_file, char *input) {
         FILE *input_file = fopen(input, "r");
         FILE *output_file = fopen("../misspelled.txt", "w");
         if (!input_file || !output_file) {
-            print_block("ERR!");
-            printf("File could not be opened!\n");
+            throw_error("File could not be opened!\n");
         }
 
         char word[MAX + 1];
@@ -121,13 +126,11 @@ DATA hash_spell_check(bool is_file, char *input) {
                 index = 0;
 
                 clean(word);
-
                 if (!hash_check(word)) {
                     fprintf(output_file, "%s\n", word);
                     misspelled_count += 1;
                 }
             }
-
             if (index > MAX) {
                 for (c = fgetc(input_file); c != EOF; c = fgetc(input_file));
             }
@@ -145,9 +148,7 @@ DATA hash_spell_check(bool is_file, char *input) {
             }
         }
         word[index] = '\0';
-
         clean(word);
-
         misspelled_count = !hash_check(word);
     }
     check_stop = clock();

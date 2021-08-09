@@ -6,11 +6,11 @@
 #define DICTIONARY_HELPERS_H
 
 #include <stdio.h>
-#include <stdbool.h>
 #include <stdlib.h>
-#include <ctype.h>
-#include <unistd.h>
+#include <stdbool.h>
 #include <string.h>
+#include <unistd.h>
+#include <ctype.h>
 #include <time.h>
 
 #define DICTIONARY "../dictionaries/large"
@@ -28,35 +28,30 @@ typedef struct {
 
 typedef struct {
     bool is_file;
-    unsigned int word_count;
-    unsigned int file_count;
-    unsigned int misspelled_count;
+    unsigned long word_count;
+    unsigned long file_count;
+    unsigned long misspelled_count;
     double load_time;
     double check_time;
     double unload_time;
-    unsigned long int memory;
+    unsigned long memory;
 } DATA;
 
+bool check_file(char *);
 ARGS parse(int, char *[]);
 
-bool check_file(char *);
-
-void throw_error(char *);
-
 void print_block(char *);
-
-void clean(char []);
-
-void meanings(const char []);
+void throw_error(char *);
 
 void help();
 
 bool is_number(const char []);
+void clean(char []);
+
+void meaning(char *, char *);
 
 double get_time(clock_t, clock_t);
-
 void statistics(char *, DATA);
-
-void compare(DATA, DATA);
+void compare(DATA, DATA, DATA);
 
 #endif //DICTIONARY_HELPERS_H
