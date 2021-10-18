@@ -9,7 +9,7 @@ bool check_file(char *file_name) {
 }
 
 ARGS parse(int argc, char *argv[]) {
-    ARGS args = {.option = -1, .method = "", .word = "", .file = "", .is_file = false, .success = false};
+    ARGS args = {.option = -1, .method = "", .input = "", .is_file = false, .success = false};
     switch (argc) {
         case 1: {
             args.option = 1;
@@ -25,12 +25,8 @@ ARGS parse(int argc, char *argv[]) {
         }
         case 3: {
             if (!strcmp(argv[1], "-c")) {
-                if (check_file(argv[2])) {
-                    args.is_file = true;
-                    args.file = argv[2];
-                } else {
-                    args.word = argv[2];
-                }
+                args.is_file = check_file(argv[2]);
+                args.input = argv[2];
                 args.option = 4;
                 args.success = true;
             }
@@ -39,19 +35,15 @@ ARGS parse(int argc, char *argv[]) {
         case 4: {
             if (!strcmp(argv[1], "-g")) {
                 if (!strcmp(argv[2], "--TRIE") || !strcmp(argv[2], "--TERN")) {
-                    args.word = argv[3];
+                    args.input = argv[3];
                     args.method = argv[2];
                     args.option = 2;
                     args.success = true;
                 }
             } else if (!strcmp(argv[1], "-s")) {
                 if (!strcmp(argv[2], "--HASH") || !strcmp(argv[2], "--TRIE") || !strcmp(argv[2], "--TERN")) {
-                    if (check_file(argv[3])) {
-                        args.is_file = true;
-                        args.file = argv[3];
-                    } else {
-                        args.word = argv[3];
-                    }
+                    args.is_file = check_file(argv[3]);
+                    args.input = argv[3];
                     args.method = argv[2];
                     args.option = 3;
                     args.success = true;
@@ -145,14 +137,14 @@ void clean(char word[]) {
 }
 
 void meaning(char *argv, char *word) {
-    unsigned long length = 8 + strlen(argv) - 10 + 22 + strlen(word) + 1;
+    unsigned long length = 8 + strlen(argv) - 10 + 14 + strlen(word) + 1;
     char command[length];
     memset(command, '\0', length * sizeof(char));
 
     strcat(command, "python3 ");
     argv[strlen(argv) - 10] = '\0';
     strcat(command, argv);
-    strcat(command, "../scripts/meaning.py ");
+    strcat(command, "../meaning.py ");
     strcat(command, word);
 
     printf("\n");
@@ -166,12 +158,8 @@ double get_time(clock_t start, clock_t stop) {
 void statistics(char *method, DATA data) {
     double total_time = data.load_time + data.check_time + data.unload_time;
 
-    if (!strcmp(method, "--TRIE")) {
-        print_block("TRIE");
-    } else if (!strcmp(method, "--HASH")) {
-        print_block("HASH");
-    } else if (!strcmp(method, "--TERN")) {
-        print_block("TERN");
+    if (!strcmp(method, "--HASH") || !strcmp(method, "--TRIE") || !strcmp(method, "--TERN")) {
+        print_block(method + 2);
     }
 
     printf("\nWORDS IN DICTIONARY: %lu\n\n", data.word_count);

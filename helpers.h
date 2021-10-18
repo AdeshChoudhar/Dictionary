@@ -20,8 +20,7 @@
 typedef struct {
     int option;
     char *method;
-    char *word;
-    char *file;
+    char *input;
     bool is_file;
     bool success;
 } ARGS;
