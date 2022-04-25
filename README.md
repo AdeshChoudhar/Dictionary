@@ -82,7 +82,6 @@ SPELL-CHECK
 </summary>
 
 Takes option `--HASH` or `--TRIE` or `--TERN` to select and use the respective data structure. Then displays various parameters regarding time and memory required.
-![Guess](media/guess.gif)
 
 | Word                                            | File                                                                                                            |
 | ----------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
